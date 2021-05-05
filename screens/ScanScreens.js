@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 export default class ScanScreen extends React.Component {
@@ -39,12 +39,17 @@ export default class ScanScreen extends React.Component {
                     style={StyleSheet.absoluteFillObject}
                 />
             );
-        }else if(buttonState === "normanl") {
+        }else if(buttonState === "normal") {
             return(
-                <View>
-                    <Text>
-                        
+                <View style={styles.container}>
+                    <Text style={styles.displayText}>
+                        {hasCameraPermission === true ? this.state.scannedData : "Request camera permission"}
                     </Text>
+                    <TouchableOpacity
+                        onPress={this.getCameraPermission}
+                        style={styles.scanButton}>
+                        <Text style={styles.buttonText}>Scan QR Code</Text>
+                    </TouchableOpacity>
                 </View>
             );
         }
